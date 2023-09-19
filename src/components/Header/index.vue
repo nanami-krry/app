@@ -8,7 +8,7 @@
           <p>
             <span>请</span>
             <router-link to="/login">登录</router-link>
-            <router-link  class="register" to="/register">免费注册</router-link>
+            <router-link class="register" to="/register">免费注册</router-link>
           </p>
         </div>
         <div class="typeList">
@@ -38,7 +38,11 @@
             class="input-error input-xxlarge"
             v-model="keyword"
           />
-          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
+          <button
+            class="sui-btn btn-xlarge btn-danger"
+            type="button"
+            @click="goSearch"
+          >
             搜索
           </button>
         </form>
@@ -49,19 +53,27 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      keyword:''
-    }
+      keyword: "",
+    };
   },
-  methods:{
+  methods: {
     //搜索按钮的回调函数，需要向search路由进行跳转
-    goSearch(){
+    goSearch() {
       // this.$router.push('/search/'+this.keyword+'?k='+this.keyword.toUpperCase())
       // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
-      this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
-    }
-  }
+      // this.$router.push({name:'search',params:{keyword:''||undefined},query:{k:this.keyword.toUpperCase()}})
+      if(this.$route.query){
+        let location={
+          name: "search",
+          params: { keyword: this.keyword||undefined }
+        }
+        location.query=this.$route.query,
+        this.$router.push(location)
+      }
+    },
+  },
 };
 </script>
 
