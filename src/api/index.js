@@ -8,3 +8,7 @@ export const reqCategoryList = () =>
 export const reqGetBannerList = () => mockRequests.get("/banner");
 
 export const reqGetFloorList = () => mockRequests.get("/floor");
+
+export const reqGetSearchInfo = (params) => {
+  return requests({ url: "/list", method: "post", data: params });
+};
